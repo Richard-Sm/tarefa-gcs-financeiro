@@ -15,6 +15,6 @@ class Lancamento extends Model
     }
 
     protected $fillable = [
-        'descricao', 'data_lancamento', 'valor', 'tipo_lancamento', 'situacao'
+        'descricao', 'data_lancamento', 'valor', 'tipo_lancamento', 'situacao','user_id'
     ];
 }

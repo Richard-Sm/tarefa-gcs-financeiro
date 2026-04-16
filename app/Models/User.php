@@ -29,4 +29,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function lancamentos()
+    {
+        return $this->hasMany(\App\Models\Lancamento::class);
+    }
 }

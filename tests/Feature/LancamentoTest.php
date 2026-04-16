@@ -5,11 +5,19 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Lancamento;
+use App\Models\User;
 
 class LancamentoTest extends TestCase
 {
-    // O RefreshDatabase garante que o banco virtual seja limpo a cada teste
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Cria um usuário falso e faz o login para o teste não ser barrado
+        $user = User::factory()->create();
+        $this->actingAs($user);
+    }
 
     // --- TESTES DE TELA E ACESSO ---
 

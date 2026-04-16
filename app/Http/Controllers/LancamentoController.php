@@ -13,7 +13,7 @@ class LancamentoController extends Controller
     // 1. LISTAR E FILTRAR (Cumprindo o requisito de Filtros)
     public function index(Request $request)
     {
-        $query = Lancamento::query();
+        $query = auth()->user()->lancamentos();
 
         // Filtro por Data Inicial e Final
         if ($request->filled('data_inicio')) {
@@ -29,8 +29,7 @@ class LancamentoController extends Controller
         }
 
         // Busca os dados filtrados ordenando pelos mais recentes
-        $lancamentos = $query->orderBy('data_lancamento', 'desc')->get();
-
+        $lancamentos = $query->orderBy('id', 'desc')->get();
         return view('lancamentos.index', compact('lancamentos'));
     }
 
@@ -42,24 +41,28 @@ class LancamentoController extends Controller
 
 // 3. SALVAR NOVO LANÇAMENTO NO BANCO
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'descricao' => 'required|string|max:200',
-            'data_lancamento' => 'required|date',
-            'valor' => 'required|numeric',
-            'tipo_lancamento' => 'required|string',
-            'situacao' => 'required|string',
-        ]);
+{
+    // 1. Validação dos campos
+    $validated = $request->validate([
+        'descricao' => 'required|string|max:200',
+        'data_lancamento' => 'required|date',
+        'valor' => 'required|numeric',
+        'tipo_lancamento' => 'required|string',
+        'situacao' => 'required|string',
+    ]);
 
-        // Capturamos o lançamento recém-criado em uma variável
-        $lancamento = Lancamento::create($validated);
+    // 2. Injetamos o ID do usuário logado no array de dados validados
+    $validated['user_id'] = auth()->id();
 
-        // Dispara o e-mail
-        Mail::to('admin@financas.com')->send(new NotificacaoLancamento($lancamento, 'Criado'));
+    // 3. Criamos o lançamento vinculado ao usuário
+    $lancamento = Lancamento::create($validated);
 
-        return redirect()->route('lancamentos.index')->with('success', 'Lançamento criado com sucesso!');
-    }
+    // 4. Dispara o e-mail para o e-mail do próprio usuário logado
+    Mail::to(auth()->user()->email)->send(new NotificacaoLancamento($lancamento, 'Criado'));
 
+    // 5. Redireciona com mensagem de sucesso
+    return redirect()->route('lancamentos.index')->with('success', 'Lançamento criado com sucesso!');
+}
     // 4. TELA DE EDIÇÃO
     public function edit(Lancamento $lancamento)
     {
@@ -80,8 +83,7 @@ class LancamentoController extends Controller
         $lancamento->update($validated);
 
         // Dispara o e-mail
-        Mail::to('richard.schmitz@universo.univates.br')->send(new NotificacaoLancamento($lancamento, 'Atualizado'));
-
+        Mail::to(auth()->user()->email)->send(new NotificacaoLancamento($lancamento, 'Atualizado'));
         return redirect()->route('lancamentos.index')->with('success', 'Lançamento atualizado com sucesso!');
     }
 
