@@ -28,6 +28,15 @@ jobs:
         cp .env.example .env
         php artisan key:generate
         touch database/database.sqlite
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Compilar os visuais (CSS/JS)
+      run: |
+        npm install
+        npm run build
 
     - name: Revisão de Qualidade de Código (Laravel Pint)
       run: ./vendor/bin/pint --test || true
