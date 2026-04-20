@@ -1,4 +1,4 @@
-ame: CI - Integracao e Qualidade
+name: CI - Integracao e Qualidade
 
 on:
   push:
