@@ -21,7 +21,7 @@ services:
   db:
     image: mysql:8.0
     ports:
-      - "${DB_PORT:-3306}:3306"
+      - "${DB_PORT:-3307}:3306"
     environment:
       - MYSQL_DATABASE=${DB_DATABASE:-financas}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
