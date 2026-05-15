@@ -49,7 +49,7 @@ class LancamentoController extends Controller
         'valor' => 'required|numeric',
         'tipo_lancamento' => 'required|string',
         'situacao' => 'required|string',
-	'observacoes' => 'required|string|max:1000'
+	'observacoes' => 'nullable|string|max:1000'
     ]);
 
     // 2. Injetamos o ID do usuário logado no array de dados validados
@@ -79,7 +79,7 @@ class LancamentoController extends Controller
             'valor' => 'required|numeric',
             'tipo_lancamento' => 'required|string',
             'situacao' => 'required|string',
-	    'observacoes' => 'required|string|max:1000'
+	    'observacoes' => 'nullable|string|max:1000'
         ]);
 
         $lancamento->update($validated);
