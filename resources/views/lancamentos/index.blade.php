@@ -24,7 +24,7 @@
     <div class="col-md-4">
         <div class="card bg-success text-white shadow">
             <div class="card-body">
-                <h5 class="card-title">Total de Receitas</h5>
+                <h5 class="card-title">Total de Receites</h5>
                 <h3>R$ {{ number_format($totalReceitas, 2, ',', '.') }}</h3>
             </div>
         </div>

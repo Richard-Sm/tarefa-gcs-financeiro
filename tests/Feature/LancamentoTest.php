@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Models\Lancamento;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class LancamentoTest extends TestCase
 {
@@ -49,7 +49,7 @@ class LancamentoTest extends TestCase
             'data_lancamento' => '2026-04-15',
             'valor' => 1500.50,
             'tipo_lancamento' => 'Receita',
-            'situacao' => 'Confirmado'
+            'situacao' => 'Confirmado',
         ];
         $this->post('/lancamentos', $dados);
         $this->assertDatabaseHas('lancamentos', ['descricao' => 'Teste de Receita']);
@@ -58,10 +58,10 @@ class LancamentoTest extends TestCase
     public function test_05_consegue_atualizar_lancamento_existente()
     {
         $lancamento = Lancamento::create([
-            'descricao' => 'Antiga', 'data_lancamento' => '2026-04-10', 
-            'valor' => 100, 'tipo_lancamento' => 'Despesa', 'situacao' => 'Pendente'
+            'descricao' => 'Antiga', 'data_lancamento' => '2026-04-10',
+            'valor' => 100, 'tipo_lancamento' => 'Despesa', 'situacao' => 'Pendente',
         ]);
-        
+
         $this->put("/lancamentos/{$lancamento->id}", array_merge($lancamento->toArray(), ['descricao' => 'Nova Descricao']));
         $this->assertDatabaseHas('lancamentos', ['descricao' => 'Nova Descricao']);
     }
@@ -69,8 +69,8 @@ class LancamentoTest extends TestCase
     public function test_06_consegue_excluir_lancamento()
     {
         $lancamento = Lancamento::create([
-            'descricao' => 'Apagar', 'data_lancamento' => '2026-04-10', 
-            'valor' => 100, 'tipo_lancamento' => 'Despesa', 'situacao' => 'Pendente'
+            'descricao' => 'Apagar', 'data_lancamento' => '2026-04-10',
+            'valor' => 100, 'tipo_lancamento' => 'Despesa', 'situacao' => 'Pendente',
         ]);
 
         $this->delete("/lancamentos/{$lancamento->id}");

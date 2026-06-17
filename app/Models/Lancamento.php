@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory; // Verifique esta linha
+use Database\Factories\LancamentoFactory; // Verifique esta linha
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Lancamento extends Model
@@ -11,10 +12,10 @@ class Lancamento extends Model
 
     protected static function newFactory()
     {
-    return \Database\Factories\LancamentoFactory::new();
+        return LancamentoFactory::new();
     }
 
     protected $fillable = [
-        'descricao', 'data_lancamento', 'valor', 'tipo_lancamento', 'situacao','user_id','observacoes'
+        'descricao', 'data_lancamento', 'valor', 'tipo_lancamento', 'situacao', 'user_id', 'observacoes',
     ];
 }

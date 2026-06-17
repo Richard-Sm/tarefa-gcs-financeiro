@@ -39,7 +39,7 @@ jobs:
         npm run build
 
     - name: Revisão de Qualidade de Código (Laravel Pint)
-      run: ./vendor/bin/pint --test || true
+      run: ./vendor/bin/pint --test
 
     - name: Executar Testes Automatizados e Estatísticas
       env:

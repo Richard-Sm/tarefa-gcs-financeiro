@@ -14,6 +14,7 @@ class NotificacaoLancamento extends Mailable
     use Queueable, SerializesModels;
 
     public $lancamento;
+
     public $acao;
 
     public function __construct(Lancamento $lancamento, $acao)
@@ -25,7 +26,7 @@ class NotificacaoLancamento extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Lançamento ' . $this->acao . ': ' . $this->lancamento->descricao,
+            subject: 'Lançamento '.$this->acao.': '.$this->lancamento->descricao,
         );
     }
 
