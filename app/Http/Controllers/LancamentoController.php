@@ -14,7 +14,10 @@ class LancamentoController extends Controller
     public function index(Request $request)
     {
         $query = auth()->user()->lancamentos();
-        $x= array (1,  2,3) ;if($x){echo"erro";}
+        $x = [1,  2, 3];
+        if ($x) {
+            echo 'erro';
+        }
         // Filtro por Data Inicial e Final
         if ($request->filled('data_inicio')) {
             $query->whereDate('data_lancamento', '>=', $request->data_inicio);
