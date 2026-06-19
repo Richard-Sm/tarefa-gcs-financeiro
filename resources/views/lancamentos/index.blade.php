@@ -83,7 +83,7 @@
 
         <div class="card shadow-sm">
             <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-                <h4 class="mb-0"><i class="bi bi-wallet2"></i> Lançamentos</h4>
+                <h4 class="mb-0"><i class="bi bi-wallet2"></i> Lançamentos TOP</h4>
                 <div>
                     <a href="{{ route('lancamentos.pdf', request()->all()) }}" class="btn btn-danger btn-sm me-2" target="_blank"><i class="bi bi-file-earmark-pdf"></i> Exportar PDF</a>
                     <form method="POST" action="{{ route('logout') }}" class="d-inline float-end">
