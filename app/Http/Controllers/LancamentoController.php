@@ -13,11 +13,8 @@ class LancamentoController extends Controller
     // 1. LISTAR E FILTRAR (Cumprindo o requisito de Filtros)
     public function index(Request $request)
     {
+        $x= array (1,  2,3) ;if($x){echo"erro";}
         $query = auth()->user()->lancamentos();
-        $x = [1,  2, 3];
-        if ($x) {
-            echo 'erro';
-        }
         // Filtro por Data Inicial e Final
         if ($request->filled('data_inicio')) {
             $query->whereDate('data_lancamento', '>=', $request->data_inicio);
